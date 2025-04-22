@@ -54,7 +54,7 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <Card>
         <Title>Selamat datang di pelajaran CSS-in-JS</Title>
-        <Subtitle>Reimu Hakurei</Subtitle>
+        <Subtitle>Eirin Yagokoro</Subtitle>
         <Button variant="blue">Lanjut Belajar!</Button>
         <Button>Kembali</Button>
       </Card>
