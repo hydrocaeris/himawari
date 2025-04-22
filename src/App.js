@@ -1,5 +1,6 @@
+import React, { useState } from 'react';
 import styled, { ThemeProvider, keyframes } from 'styled-components';
-import { theme } from './theme';
+import { lightTheme, darkTheme } from './theme';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: scale(0.95); }
@@ -13,15 +14,15 @@ const bounce = keyframes`
   50% {
     transform: translateY(-6px);
   }
-`
+`;
 
 const Card = styled.div`
   padding: 24px;
   border-radius: 12px;
   background: ${props => props.theme.colors.white};
   text-align: center;
-  animation: ${fadeIn} 0.6s ease-in-out;
-  animation: ${bounce} 0.4s infinite;
+  animation: ${fadeIn} 0.6s ease-in-out, ${bounce} 1s infinite;
+  transition: background 0.3s ease;
 `;
 
 const Title = styled.h1`
@@ -47,16 +48,25 @@ const Button = styled.button`
     transform: scale(1.05);
     opacity: 0.9;
   }
+
+  transition: all 0.3s ease;
 `;
 
 export default function App() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const toggleTheme = () => setIsDarkMode(prev => !prev);
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <Card>
         <Title>Selamat datang di pelajaran CSS-in-JS</Title>
         <Subtitle>Eirin Yagokoro</Subtitle>
         <Button variant="blue">Lanjut Belajar!</Button>
         <Button>Kembali</Button>
+        <Button onClick={toggleTheme}>
+          {isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+        </Button>
       </Card>
     </ThemeProvider>
   );
